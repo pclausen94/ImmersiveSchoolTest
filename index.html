@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <title>Immersive School Test</title>
 </head>
 <body>
+    <script>
+        AFRAME.registerComponent("foo", {
+        init: function() {
+        let tmp = false
+        this.el.addEventListener("click", (e)=>{
+         let scale = tmp ? "1 1 1" : "2 2 2"
+         this.el.setAttribute("scale", scale)
+         tmp =!tmp
+        })
+        }
+        })
+        
+        </script>
+    <a-assets>
+        <img id="skyTexture"
+        src="./images/pic.jpeg">
+    </a-assets>
     <a-scene>
-        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+        <a-box position="-1.5 0.5 -3" rotation="0 45 0" color="#4CC3D9" foo></a-box>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+        
+                <a-camera>
+                    <a-entity cursor="fuse: true; fuseTimeout: 500"
+                              position="0 0 -1"
+                              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                              material="color: black; shader: flat">
+                    </a-entity>
+                </a-camera>
+                  
+                  <a-entity id="box" cursor-listener geometry="primitive: box" material="color: blue" foo></a-entity>  
+           
+        <a-sky src="#skyTexture"></a-sky>
     </a-scene>
+
+    
     
 </body>
 </html>
