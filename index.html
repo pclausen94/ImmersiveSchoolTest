@@ -1,45 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <title>Immersive School Test</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        AFRAME.registerComponent("foo", {
-        init: function() {
-        let tmp = false
-        this.el.addEventListener("click", (e)=>{
-         let scale = tmp ? "1 1 1" : "2 2 2"
-         this.el.setAttribute("scale", scale)
-         tmp =!tmp
-        })
-        }
-        })
-        
-        </script>
-    <a-assets>
-        <img id="skyTexture"
-        src="./images/pic.jpeg">
-    </a-assets>
-    <a-scene>
-        <a-box position="-1.5 0.5 -3" rotation="0 45 0" color="#4CC3D9" foo></a-box>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-        
-                <a-camera>
-                    <a-entity cursor="fuse: true; fuseTimeout: 500"
-                              position="0 0 -1"
-                              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                              material="color: black; shader: flat">
-                    </a-entity>
-                </a-camera>
-                  
-                  <a-entity id="box" cursor-listener geometry="primitive: box" material="color: blue" foo></a-entity>  
-           
-        <a-sky src="#skyTexture"></a-sky>
-    </a-scene>
+      AFRAME.registerComponent("foo", {
+        init: function () {
+          let tmp = false;
+          this.el.addEventListener("click", (e) => {
+            let scale = tmp ? "1 1 1" : "2 2 2";
+            this.el.setAttribute("scale", scale);
+            tmp = !tmp;
+          });
+        },
+      });
 
-    
-    
-</body>
+      AFRAME.registerComponent("change1", {
+        init: function () {
+          this.el.addEventListener("click", (e) => {
+            document.getElementById('scene1').setAttribute('visible', 'false')
+            document.getElementById('scene2').setAttribute('visible', 'true')
+          });
+        },
+      });
+
+      AFRAME.registerComponent("change2", {
+        init: function () {
+          this.el.addEventListener("click", (e) => {
+            document.getElementById('scene1').setAttribute('visible', 'true')
+            document.getElementById('scene2').setAttribute('visible', 'false')
+          });
+        },
+      });
+
+    </script>
+    <a-assets>
+      <img id="skyTexture" src="./images/pic.jpeg" />
+      <img id="niceTexture" src="./images/pic2.jpeg" />
+    </a-assets>
+
+    <a-scene>
+ 
+          <a-camera>
+              <a-entity
+                cursor="fuse: false; fuseTimeout: 500"
+                position="0 0 -1"
+                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                material="color: black; shader: flat"
+                animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+                animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+              >
+              </a-entity>
+            </a-camera>
+
+            
+
+      <a-entity id="scene1" visible="true">
+        <a-box
+          position="-1.5 0.5 -3"
+          rotation="0 45 0"
+          color="#4CC3D9"
+          change1
+        ></a-box>
+        <a-plane
+          position="0 0 -4"
+          rotation="-90 0 0"
+          width="4"
+          height="4"
+          color="#7BC8A4"
+        ></a-plane>
+        <a-sky src="#skyTexture"></a-sky>
+      </a-entity>
+
+      <a-entity id="scene2" visible="false">
+        <a-box
+          position="1 2 -2"
+          rotation="2 10 5"
+          color="#4CC3D9"
+          change2
+        ></a-box>
+        <a-plane
+          position="10 1 4"
+          rotation="-10 0 0"
+          width="4"
+          height="4"
+          color="#7BC8A4"
+        ></a-plane>
+        
+        <a-sky src="#niceTexture"></a-sky>
+      </a-entity>
+    </a-scene>
+  </body>
 </html>
