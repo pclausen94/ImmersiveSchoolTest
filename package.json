@@ -1,0 +1,23 @@
+{
+  "name": "immersiveschooltest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aframe-environment-component": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pclausen94/ImmersiveSchoolTest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pclausen94/ImmersiveSchoolTest/issues"
+  },
+  "homepage": "https://github.com/pclausen94/ImmersiveSchoolTest#readme"
+}
