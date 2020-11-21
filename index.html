@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <title>Immersive School Test</title>
   </head>
   <body>
@@ -17,20 +18,38 @@
         },
       });
 
-      AFRAME.registerComponent("change1", {
+      AFRAME.registerComponent("from1to2", {
         init: function () {
           this.el.addEventListener("click", (e) => {
-            document.getElementById('scene1').setAttribute('visible', 'false')
-            document.getElementById('scene2').setAttribute('visible', 'true')
+            document.getElementById('scene2').setAttribute('environment', 'active: true')
+            document.getElementById('scene1').setAttribute('environment', 'active: false')
           });
         },
       });
 
-      AFRAME.registerComponent("change2", {
+      AFRAME.registerComponent("from2to1", {
         init: function () {
           this.el.addEventListener("click", (e) => {
-            document.getElementById('scene1').setAttribute('visible', 'true')
-            document.getElementById('scene2').setAttribute('visible', 'false')
+            document.getElementById('scene1').setAttribute('environment', 'active: true')
+            document.getElementById('scene2').setAttribute('environment', 'active: false')
+          });
+        },
+      });
+
+      AFRAME.registerComponent("from2to3", {
+        init: function () {
+          this.el.addEventListener("click", (e) => {
+            document.getElementById('scene3').setAttribute('environment', 'active: true')
+            document.getElementById('scene2').setAttribute('environment', 'active: false')
+          });
+        },
+      });
+
+      AFRAME.registerComponent("from3to2", {
+        init: function () {
+          this.el.addEventListener("click", (e) => {
+            document.getElementById('scene2').setAttribute('environment', 'active: true')
+            document.getElementById('scene3').setAttribute('environment', 'active: false')
           });
         },
       });
@@ -48,48 +67,45 @@
                 cursor="fuse: false; fuseTimeout: 500"
                 position="0 0 -1"
                 geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                material="color: black; shader: flat"
+                material="color: red; shader: flat"
                 animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
                 animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
               >
               </a-entity>
             </a-camera>
 
-            
-
-      <a-entity id="scene1" visible="true">
+      <a-entity id="scene1" environment="active: true; preset: forest; shadow: true">
         <a-box
           position="-1.5 0.5 -3"
           rotation="0 45 0"
           color="#4CC3D9"
-          change1
+          from1to2
         ></a-box>
-        <a-plane
-          position="0 0 -4"
-          rotation="-90 0 0"
-          width="4"
-          height="4"
-          color="#7BC8A4"
-        ></a-plane>
-        <a-sky src="#skyTexture"></a-sky>
       </a-entity>
 
-      <a-entity id="scene2" visible="false">
+      <a-entity id="scene2" environment="active: false; preset: egypt; shadow: true">
         <a-box
-          position="1 2 -2"
-          rotation="2 10 5"
+          position="-3.5 0.5 -3"
+          rotation="0 45 0"
           color="#4CC3D9"
-          change2
+          from2to1
         ></a-box>
-        <a-plane
-          position="10 1 4"
-          rotation="-10 0 0"
-          width="4"
-          height="4"
-          color="#7BC8A4"
-        ></a-plane>
-        
-        <a-sky src="#niceTexture"></a-sky>
+
+        <a-box
+          position="-8.5 0.5 -3"
+          rotation="0 45 0"
+          color="green"
+          from2to3
+        ></a-box>
+      </a-entity>
+
+      <a-entity id="scene3" environment="active: false; preset: tron; shadow: true">
+        <a-box
+          position="2.5 0.5 -3"
+          rotation="0 45 0"
+          color="purple"
+          from3to2
+        ></a-box>
       </a-entity>
     </a-scene>
   </body>
