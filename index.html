@@ -5,7 +5,6 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <title>Immersive School Test</title>
-    
   </head>
   <body>
     <script>
@@ -57,12 +56,16 @@
       });
 
     </script>
+    
     <a-assets>
       <img id="skyTexture" src="./images/pic.jpeg" />
       <img id="niceTexture" src="./images/pic2.jpeg" />
     </a-assets>
 
     <a-scene>
+      
+
+      <!-- <a-sound src="src: url(audio\bensound-ukulele.mp3)" autoplay="true" position="0 2 5"></a-sound> -->
  
           <a-camera>
               <a-entity
@@ -72,15 +75,30 @@
                 material="color: red; shader: flat"
                 animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
                 animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+                
               >
               </a-entity>
             </a-camera>
 
       <a-entity id="scene1" environment="active: true; preset: none; shadow: true">
+        <a-plane
+          position="-1.5 2.5 5"
+          rotation="0 180 0"
+          color="black"
+          width="5"
+          height="0.7"
+        ></a-plane>
+        <a-text
+        value="Slip cirklen over firkanten, for at begynde."
+        position="0.60 2.5 5"
+        rotation="0 180 0"
+        color="white"
+      >
+      </a-text>
         <a-box
-          position="-7.5 0.5 -3"
+          position="-1.5 1.5 5"
           rotation="0 45 0"
-          color="#4CC3D9"
+          color="red"
           from1to2
         ></a-box>
         <a-text value="Velkommen til simulationen"
@@ -113,22 +131,20 @@
       </a-text>
       <a-text value="Du kigger rundt med musen, ved at holde venstre-knap nede, imens du drejer rundt"
         position="-1.5 4.0 -12"
-        color="black">
+        color="white">
       </a-text>
-      <a-text value="- Drej nu til venstre og gaa fremad"
+      <a-text value="- Vend dig nu om og gaa fremad imod firkanten"
         position="-1.5 3.6 -12"
-        color="black">
+        color="white">
       </a-text>
+      <a-plane
+      position="0.8 3.8 -12"
+      color="red"
+      width="4.680"
+      height="0.9">
+      </a-plane>
       </a-entity>
-
-      <a-entity id="scene2" environment="active: false; preset: egypt; shadow: true">
-        <a-box
-          position="-3.5 0.5 -3"
-          rotation="0 45 0"
-          color="#4CC3D9"
-          from2to1
-        ></a-box>
-
+      <a-entity id="scene2" environment="active: false; preset: default; shadow: true; ground: spikes; groundColor2: #694439; groundColor: #694439; groundTexture: squares; dressing: trees; dressingScale: 5" >
         <a-box
           position="-8.5 0.5 -3"
           rotation="0 45 0"
@@ -137,11 +153,11 @@
         ></a-box>
       </a-entity>
 
-      <a-entity id="scene3" environment="active: false; preset: tron; shadow: true">
+      <a-entity id="scene3" environment="active: false; preset: default; shadow: true; ground: noise; skyType: color; skyColor: black; fog: 1; groundColor: gray; groundTexture: none; dressing: cubes; dressingVariance: 1 1 1; dressingAmount: 200; playArea: 0.9"  >
         <a-box
           position="2.5 0.5 -3"
           rotation="0 45 0"
-          color="purple"
+          color="brown"
           from3to2
         ></a-box>
       </a-entity>
